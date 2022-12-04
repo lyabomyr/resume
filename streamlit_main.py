@@ -1,8 +1,9 @@
 import streamlit as st
-from title import title
-from skills import skills
-from experience import experience
-from education_and_cources import education
+from app.title import title
+from app.skills import skills
+from app.experience import experience
+from app.education_and_cources import education
+from config import pdf_file_patch, file_name
 
 def structure():
     st.markdown(""" <style>
@@ -17,12 +18,12 @@ def structure():
 def main():
     structure()
     with st.sidebar:  
-        with open("src/CV_QA_Kachko_Luibomyr.pdf", "rb") as pdf_file:
+        with open(pdf_file_patch , "rb") as pdf_file:
             PDFbyte = pdf_file.read()
 
-        st.download_button(label=" Download CV_QA_Kachko_Luibomyr.pdf",
+        st.download_button(label= f" Download {file_name}",
                         data=PDFbyte,
-                        file_name="CV_QA_Kachko_Luibomyr.pdf",
+                        file_name= file_name,
                         mime='application/octet-stream')
 
 if __name__ == "__main__":

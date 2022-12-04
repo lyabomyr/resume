@@ -1,23 +1,34 @@
 import streamlit as st
+from config import photo_patch
+from pdfparser.pdf_parser import PdfParser
 
 def title():
     col1, col2 = st.columns([9,3])
     with col1:
         st.title('Luibomyr Kachko')
-        st.markdown('''##### Role: *QA engineer*''')
-
-        st.markdown('''
+        st.markdown(f'''##### Role: *{PdfParser().title_from_pdf()['role'].strip()}*''')
+        st.markdown(f'''
                     ##### CONTACTS:
-                    - **Location**: Kyiv
-                    - **Phone:** +38(066)621-95-72
-                    - **Email:** <lyabomyr@gmail.com>
-                    - **Skype:** lyabomyr
-                    - **Linkedin:** <https://www.linkedin.com/in/luibomyrkachko2473611a5/>
+                    - **Location**: {PdfParser().title_from_pdf()['location']}
+                    - **Phone:** {PdfParser().title_from_pdf()['phone']}
+                    - **Email:** <{PdfParser().title_from_pdf()['email']}>
+                    - **Skype:** {PdfParser().title_from_pdf()['skype']}
+                    - **Linkedin:** <{PdfParser().title_from_pdf()['linkedin']}>
                     ***''')
+            
+            # '''
+            #         ##### CONTACTS:
+            #         - **Location**: Kyiv
+            #         - **Phone:** +38(066)621-95-72
+            #         - **Email:** <lyabomyr@gmail.com>
+            #         - **Skype:** lyabomyr
+            #         - **Linkedin:** <https://www.linkedin.com/in/luibomyrkachko2473611a5/>
+            #         ***'''
+
     with col2:
-        st.image('src/lkphoto.jpg', width=200)
-    st.markdown('''
-    ##### SUMMARY
-    Results-oriented quality assurance tester with 3+ years expertise in  application development life cycles. Independently set up testing in the company, which helped improve the product and helped reduce the burden on customer support. Get position of general QA  that can improve my knowledge and help make product better
+        st.image(photo_patch, width=200)
+    st.markdown(f'''
+    ##### SUMMARY:
+    {PdfParser().title_from_pdf()['summary']}
     ***
     ''')
